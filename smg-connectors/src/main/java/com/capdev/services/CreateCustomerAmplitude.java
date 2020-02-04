@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import com.capdev.service.IService;
@@ -16,7 +17,6 @@ import com.soprabanking.amplitude.createcustomer.CreateCustomerPortType;
 import com.soprabanking.amplitude.createcustomer.CreateCustomerRequest;
 import com.soprabanking.amplitude.createcustomer.CreateCustomerRequestFlow;
 import com.soprabanking.amplitude.createcustomer.CreateCustomerResponseFlow;
-import com.soprabanking.amplitude.createcustomer.ErrorResponseFlow_Exception;
 import com.soprabanking.amplitude.createcustomer.RequestHeader;
 
 public class CreateCustomerAmplitude implements IService {
@@ -35,15 +35,19 @@ public class CreateCustomerAmplitude implements IService {
 			header.setRequestId("requestId");
 			header.setServiceName("serviceName");
 
+			
 			SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_AMPLITUDE);
 			String date = format.format(new Date());
 			XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(date);
-			header.setTimestamp(xmlDate);
-
-			header.setUserCode("userCode");
-
 			createCustomerRequest.setCustomerType("1");
 			createCustomerRequest.setTitleCode("titleCode");
+			
+			
+			
+			header.setTimestamp(xmlDate);
+			header.setUserCode("userCode");
+
+			
 
 			requestFolow.setRequestHeader(header);
 			requestFolow.setCreateCustomerRequest(createCustomerRequest);
@@ -51,16 +55,17 @@ public class CreateCustomerAmplitude implements IService {
 			CreateCustomer service = new CreateCustomer();
 			CreateCustomerPortType port = service.getCreateCustomerPortType();
 			response = (CreateCustomerResponseFlow) port.createCustomer(requestFolow);
+			
 			System.out.println(response.getCreateCustomerResponse().getCustomerCode());
+			
 			headerResponse.setCode(new Long(200));
 			serviceResponse.setHeader(headerResponse);
 			Map<String, Object> body = new HashMap<String, Object>();
 			body.put("customerCode", response.getCreateCustomerResponse().getCustomerCode());
 			serviceResponse.setBody(body);
 			
+		
 		} catch (Exception e) {
-			// TODO: handle exception
-			
 			headerResponse.setCode(new Long(400));
 			headerResponse.setMessage(e.getMessage());
 			serviceResponse.setHeader(headerResponse);

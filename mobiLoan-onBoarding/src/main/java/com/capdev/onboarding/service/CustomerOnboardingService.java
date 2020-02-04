@@ -35,17 +35,21 @@ public class CustomerOnboardingService {
      * @return the persisted entity.
      */
     public Object save(CustomerOnboarding customerOnboarding) {
+    	
     	MiddlWare middlWare = new MiddlWare();
-		Map<String,Object> req = new HashMap<String, Object>();
+		Map<String, Object> req = new HashMap<String, Object>();
 		req.put("customerCode", "code");
-		Map<String,Object> obj = (Map<String, Object>) middlWare.post("CreateCustomerAmplitude", "soap", req);
-		
+		Map<String, Object> obj = (Map<String, Object>) middlWare.post("CreateCustomerAmplitude", "soap", req);
 		return obj;
+		
+		//Here is my trouble.. I couldn't figure out what to write to get the response from my CreateAccountMock!
+		//I tried to do the same as above with CreateAccountAmplitude, but I am always having "500 Internal Sys Error"!
+		
     }
 
     /**
      * Get all the customerOnboardings.
-     *
+     * 
      * @return the list of entities.
      */
     @Transactional(readOnly = true)

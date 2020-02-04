@@ -45,8 +45,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/mobiLoanDB_service?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: onboarding
-    password: Cap@Dev2020
+    username: root
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false

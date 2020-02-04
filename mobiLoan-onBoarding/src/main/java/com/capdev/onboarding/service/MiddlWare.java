@@ -33,7 +33,7 @@ public class MiddlWare {
 	 private ServiceRequestHeader header;
 	    
 	 
-	    public Object post(String serviceName,String protocol,Map req) {
+	    public Object post(String serviceName, String protocol, Map req) {
 	    	 	
 	    	RestTemplate restTemplate = new RestTemplate();
 	    	request = new ServiceRequest();
@@ -46,7 +46,7 @@ public class MiddlWare {
 	        request.setHeader(header);
 	        request.setBody(req);
 	        
-	        ServiceResponse response = restTemplate.postForObject( uri, request,ServiceResponse.class);
+	        ServiceResponse response = restTemplate.postForObject(uri, request, ServiceResponse.class);
 	    	
 	        return response.getBody();
 //	        ResponseEntity<Map> response = (ResponseEntity<Map>) this.restTemplate.postForObject(url, request, Map.class, 1);
