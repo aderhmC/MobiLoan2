@@ -57,7 +57,6 @@ public class CreateAccountAmplitude implements IService{
 			serviceResponse.setHeader(headerResponse);
 			Map<String, Object> body = new HashMap<String, Object>();
 			
-			//In here we're putting the value of the branchCode in the body.. it's the value that we want to return in our response!
 			body.put("code", response.getCreateAccountResponse().getAccountIdentifier().getIdentifier().getInternalFormatAccountOurBranch().getBranch().getCode());
 			serviceResponse.setBody(body);
 			
