@@ -57,7 +57,7 @@ public class CreateAccountAmplitude implements IService{
 			serviceResponse.setHeader(headerResponse);
 			Map<String, Object> body = new HashMap<String, Object>();
 			
-			body.put("code", response.getCreateAccountResponse().getAccountIdentifier().getIdentifier().getInternalFormatAccountOurBranch().getBranch().getCode());
+			body.put("accountIdentifier", response.getCreateAccountResponse().getAccountIdentifier());
 			serviceResponse.setBody(body);
 			
 		} catch (Exception e) {

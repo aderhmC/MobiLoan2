@@ -57,7 +57,7 @@ public class CustomerOnboardingResource {
         Map<String,Object> result = (Map<String, Object>) customerOnboardingService.save(customerOnboarding);
         CustomerOnboardingResponse response = new CustomerOnboardingResponse();
         
-        response.setReceiptNo(result.get("customerCode").toString());
+        response.setReceiptNo(result.get("accountIdentifier").toString());
         response.setRequestRefID("");
         response.setStatusCode("S0");
         response.setStatus("Processing");

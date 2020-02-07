@@ -30,7 +30,7 @@ public class CreateAccount
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/git/mobiLoan/mobiLoan/smg-connectors/src/main/resources/wsdl/createAccount.wsdl");
+            url = new URL("http://localhost:8088/mockcreateAccountBinding?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

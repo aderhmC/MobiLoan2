@@ -12,8 +12,8 @@ public class Main {
 		
 		MiddlWare middlWare = new MiddlWare();
 		Map<String,Object> req = new HashMap<String, Object>();
-		req.put("customerCode", "code");
-		Map<String,Object> obj = (Map<String, Object>) middlWare.post("CreateCustomerAmplitude", "soap", req);
-		System.out.println(obj.get("code"));
+		req.put("accountIdentifier", "identifier");
+		Map<String,Object> obj = (Map<String, Object>) middlWare.post("CreateAccountAmplitude", "soap", req);
+		System.out.println(obj.get("accountIdentifier"));
 	}
 }

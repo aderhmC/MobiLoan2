@@ -38,12 +38,9 @@ public class CustomerOnboardingService {
     	
     	MiddlWare middlWare = new MiddlWare();
 		Map<String, Object> req = new HashMap<String, Object>();
-		req.put("customerCode", "code");
-		Map<String, Object> obj = (Map<String, Object>) middlWare.post("CreateCustomerAmplitude", "soap", req);
+		req.put("accountIdentifier", "identifier");
+		Map<String, Object> obj = (Map<String, Object>) middlWare.post("CreateAccountAmplitude", "soap", req);
 		return obj;
-		
-		//Here is my trouble.. I couldn't figure out what to write to get the response from my CreateAccountMock!
-		//I tried to do the same as above with CreateAccountAmplitude, but I am always having "500 Internal Sys Error"!
 		
     }
 
