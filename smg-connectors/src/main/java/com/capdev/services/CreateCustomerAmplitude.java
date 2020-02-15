@@ -61,7 +61,7 @@ public class CreateCustomerAmplitude implements IService {
 			headerResponse.setCode(new Long(200));
 			serviceResponse.setHeader(headerResponse);
 			Map<String, Object> body = new HashMap<String, Object>();
-			body.put("customerCode", response.getCreateCustomerResponse().getCustomerCode());
+			body.put("Hi", response.getCreateCustomerResponse().getCustomerCode());
 			serviceResponse.setBody(body);
 			
 		

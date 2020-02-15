@@ -1,0 +1,249 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fjs="http://soprabanking.com/amplitude" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="getCustomerContactList" targetNamespace="http://soprabanking.com/amplitude">
+<wsdl:types>
+<xsd:schema xmlns:s1="http://soprabanking.com/amplitude" elementFormDefault="qualified" targetNamespace="http://soprabanking.com/amplitude">
+<xsd:simpleType name="charMax50">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="50"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="charMax10">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="10"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char3">
+<xsd:restriction base="xsd:string">
+<xsd:length value="3"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="charMax30">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="30"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="language">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="code" type="s1:char3"/>
+<xsd:element minOccurs="0" name="designation" type="s1:charMax30"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="responseHeader">
+<xsd:sequence>
+<xsd:element name="requestId" type="s1:charMax50"/>
+<xsd:element name="responseId" type="s1:charMax50"/>
+<xsd:element type="xsd:dateTime" name="timestamp"/>
+<xsd:element name="serviceVersion" type="s1:charMax10"/>
+<xsd:element minOccurs="0" name="language" type="s1:language"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="statusCodeType">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="-1"/>
+<xsd:enumeration value="0"/>
+<xsd:enumeration value="1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="responseMessageNature">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="ERROR"/>
+<xsd:enumeration value="INFO"/>
+<xsd:enumeration value="WARNING"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char6">
+<xsd:restriction base="xsd:string">
+<xsd:length value="6"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="errorInformation">
+<xsd:sequence>
+<xsd:element type="xsd:string" name="errorCode" minOccurs="0"/>
+<xsd:element type="xsd:string" name="convertedCode" minOccurs="0"/>
+<xsd:element type="xsd:string" name="errorMessage" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="responseStatusMessage">
+<xsd:sequence>
+<xsd:element name="nature" type="s1:responseMessageNature"/>
+<xsd:element name="code" type="s1:char6"/>
+<xsd:element type="xsd:string" name="line" maxOccurs="unbounded" minOccurs="0"/>
+<xsd:element minOccurs="0" name="errorInformation" type="s1:errorInformation"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="responseStatusMessages">
+<xsd:sequence>
+<xsd:element name="message" type="s1:responseStatusMessage" maxOccurs="unbounded" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="responseStatus">
+<xsd:sequence>
+<xsd:element name="statusCode" type="s1:statusCodeType"/>
+<xsd:element minOccurs="0" name="messages" type="s1:responseStatusMessages"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="errorResponseFlow">
+<xsd:sequence>
+<xsd:element name="responseHeader" type="s1:responseHeader"/>
+<xsd:element name="responseStatus" type="s1:responseStatus"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="errorResponseFlow" type="s1:errorResponseFlow"/>
+<xsd:complexType name="getStatusRequestFlow">
+<xsd:sequence>
+<xsd:element type="xsd:string" name="getStatusRequest"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="getStatusRequestFlow" type="s1:getStatusRequestFlow"/>
+<xsd:complexType name="getStatusResponse">
+<xsd:sequence>
+<xsd:element type="xsd:dateTime" name="timeStamp"/>
+<xsd:element name="serviceName" type="s1:charMax50"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="getStatusResponseFlow">
+<xsd:sequence>
+<xsd:element name="getStatusResponse" type="s1:getStatusResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="getStatusResponseFlow" type="s1:getStatusResponseFlow"/>
+<xsd:simpleType name="languageCode">
+<xsd:restriction base="xsd:string">
+<xsd:length value="3"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="channelCode">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0"/>
+<xsd:maxLength value="6"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="requestHeader">
+<xsd:sequence>
+<xsd:element name="requestId" type="s1:charMax50"/>
+<xsd:element name="serviceName" type="s1:charMax50"/>
+<xsd:element type="xsd:dateTime" name="timestamp"/>
+<xsd:element minOccurs="0" name="originalName" type="s1:charMax50"/>
+<xsd:element minOccurs="0" name="originalId" type="s1:charMax50"/>
+<xsd:element type="xsd:dateTime" name="originalTimestamp" minOccurs="0"/>
+<xsd:element minOccurs="0" name="languageCode" type="s1:languageCode"/>
+<xsd:element name="userCode" type="s1:charMax10"/>
+<xsd:element minOccurs="0" name="channelCode" type="s1:channelCode"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="charMax15">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="15"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="getCustomerContactListRequest">
+<xsd:sequence>
+<xsd:element name="customerCode" type="s1:charMax15"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="getCustomerContactListRequestFlow">
+<xsd:sequence>
+<xsd:element name="requestHeader" type="s1:requestHeader"/>
+<xsd:element name="getCustomerContactListRequest" type="s1:getCustomerContactListRequest"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="getCustomerContactListRequestFlow" type="s1:getCustomerContactListRequestFlow"/>
+<xsd:simpleType name="charMax36">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="36"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="charMax20">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="20"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="customerContact">
+<xsd:sequence>
+<xsd:element name="customerCode" type="s1:charMax15"/>
+<xsd:element name="lastname" type="s1:charMax36"/>
+<xsd:element minOccurs="0" name="firstname" type="s1:charMax30"/>
+<xsd:element minOccurs="0" name="phoneNumber" type="s1:charMax20"/>
+<xsd:element minOccurs="0" name="mail" type="s1:charMax50"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="getCustomerContactListResponse">
+<xsd:sequence>
+<xsd:element name="customerContact" type="s1:customerContact" maxOccurs="unbounded" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="getCustomerContactListResponseFlow">
+<xsd:sequence>
+<xsd:element name="responseHeader" type="s1:responseHeader"/>
+<xsd:element name="responseStatus" type="s1:responseStatus"/>
+<xsd:element minOccurs="0" name="getCustomerContactListResponse" type="s1:getCustomerContactListResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="getCustomerContactListResponseFlow" type="s1:getCustomerContactListResponseFlow"/>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="errorResponseFlow">
+<wsdl:part name="errorResponseFlow" element="fjs:errorResponseFlow"/>
+</wsdl:message>
+<wsdl:message name="getStatusIn">
+<wsdl:part name="parameters" element="fjs:getStatusRequestFlow"/>
+</wsdl:message>
+<wsdl:message name="getStatusOut">
+<wsdl:part name="parameters" element="fjs:getStatusResponseFlow"/>
+</wsdl:message>
+<wsdl:message name="getCustomerContactListIn">
+<wsdl:part name="parameters" element="fjs:getCustomerContactListRequestFlow"/>
+</wsdl:message>
+<wsdl:message name="getCustomerContactListOut">
+<wsdl:part name="parameters" element="fjs:getCustomerContactListResponseFlow"/>
+</wsdl:message>
+<wsdl:portType name="getCustomerContactListPortType">
+<wsdl:operation name="getStatus">
+<wsdl:input message="fjs:getStatusIn" name="getStatusRequestFlow"/>
+<wsdl:output message="fjs:getStatusOut" name="getStatusResponseFlow"/>
+<wsdl:fault message="fjs:errorResponseFlow" name="errorResponseFlow"/>
+</wsdl:operation>
+<wsdl:operation name="getCustomerContactList">
+<wsdl:input message="fjs:getCustomerContactListIn" name="getCustomerContactListRequestFlow"/>
+<wsdl:output message="fjs:getCustomerContactListOut" name="getCustomerContactListResponseFlow"/>
+<wsdl:fault message="fjs:errorResponseFlow" name="errorResponseFlow"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="getCustomerContactListBinding" type="fjs:getCustomerContactListPortType">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="getStatus">
+<soap:operation soapAction="getStatus"/>
+<wsdl:input name="getStatusRequestFlow">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getStatusResponseFlow">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="errorResponseFlow">
+<soap:fault use="literal" name="errorResponseFlow"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCustomerContactList">
+<soap:operation soapAction="getCustomerContactList"/>
+<wsdl:input name="getCustomerContactListRequestFlow">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCustomerContactListResponseFlow">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="errorResponseFlow">
+<soap:fault use="literal" name="errorResponseFlow"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="getCustomerContactList">
+<wsdl:port binding="fjs:getCustomerContactListBinding" name="getCustomerContactListPortType">
+<soap:address location="https://192.168.208.33:8095/getCustomerContactList"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

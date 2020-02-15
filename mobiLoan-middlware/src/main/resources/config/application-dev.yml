@@ -19,12 +19,12 @@ logging:
     io.github.jhipster: DEBUG
     com.capdev.middleware: DEBUG
 
-#eureka:
-#  instance:
-#    prefer-ip-address: true
-#  client:
-#    service-url:
-#      defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
 spring:
   profiles:
@@ -44,9 +44,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/mobiLoanDB?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=false
+    url: jdbc:mysql://localhost:3306/mobiLoanDB?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
-    password: Root@123
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false

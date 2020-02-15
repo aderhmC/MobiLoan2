@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.capdev.middleware.repository.ServiceRepository;
 import com.capdev.middleware.web.rest.errors.BadRequestAlertException;
 import com.capdev.service.IService;
 import com.capdev.service.payload.ServiceRequest;
@@ -25,18 +26,19 @@ public class ServiceDispatcher {
 	protected ObjectMapper objectMaper = new ObjectMapper()
 			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 			.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
+	
 	public ServiceResponse call(ServiceRequest request) {
-		// TODO Auto-generated method stub
-		validateRequest(request);
+		
+		validateRequest(request);	
 		authetication(request.getHeader());
 		IService service;
+		
 		try {
-
 			service = (IService) Class.forName("com.capdev.services."+request.getHeader().getServiceName()).newInstance();
 		} catch (Exception e) {
 			throw new BadRequestAlertException(e.getCause().toString(), null, "");
 		}
+		
 		return service.callSoap(request);
 
 	}
@@ -54,7 +56,5 @@ public class ServiceDispatcher {
 		if (header.getUserName() == null || header.getPassword() == null) {
 			throw new BadRequestAlertException("User and Password mandatory", null, "");
 		}
-
 	}
-
 }

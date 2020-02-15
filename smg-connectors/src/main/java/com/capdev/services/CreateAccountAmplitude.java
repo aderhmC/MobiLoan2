@@ -51,13 +51,13 @@ public class CreateAccountAmplitude implements IService{
 			CreateAccountPortType port = service.getCreateAccountPortType();
 			response = (CreateAccountResponseFlow) port.createAccount(requestFolow);
 			
-			System.out.println(response.getCreateAccountResponse().getAccountIdentifier());
+			//System.out.println(response.getCreateAccountResponse().getAccountIdentifier().getTitle());
 			
 			headerResponse.setCode(new Long(200));
 			serviceResponse.setHeader(headerResponse);
 			Map<String, Object> body = new HashMap<String, Object>();
 			
-			body.put("accountIdentifier", response.getCreateAccountResponse().getAccountIdentifier());
+			body.put("Hi", response.getCreateAccountResponse().getAccountIdentifier().getTitle());
 			serviceResponse.setBody(body);
 			
 		} catch (Exception e) {

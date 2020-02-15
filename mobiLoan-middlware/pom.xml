@@ -371,6 +371,16 @@
         	<artifactId>mobiLoan-commons</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+        	<groupId>com.capdev</groupId>
+        	<artifactId>kyc-connectors</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.capdev</groupId>
+        	<artifactId>createtransfer-connectors</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
